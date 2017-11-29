@@ -1,5 +1,5 @@
 /*
-	Stores a list of sensor devices and display them using the Gooogle Maps API
+	Stores a list of sensor devices and provide functions for processing their data arrays
 	Author: H Nguyen
 *====================================================================================*/
 
@@ -68,17 +68,17 @@ function getDevicesInfo() {
 
 			if (sensors.length == sensorNames.length) {
 				//Get the last known measurement for each device for display
-				updateData();
+				updateData("10minute");
 				log();
 			}
 		});
 	});
 }
 
-function updateData() {
+function updateData(sampleRate) {
 	url = "http://shed.kent.ac.uk/device/";
 	$.each(sensors, function(index, item) {
-		var query = url + item.id + "/10minute";
+		var query = url + item.id + "/" + sampleRate;
 		$.get(query, function(data) {
 			if (item.type == "gas") item.data = data.gas_values;
 			else if (item.type == "solar") item.data = data.solar_values;
