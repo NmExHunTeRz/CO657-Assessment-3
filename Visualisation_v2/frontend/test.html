@@ -1,12 +1,27 @@
 <html>
 	<head>
+		<!-- jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="../js/data-processing.js"></script>
 		<script src="../js/gmap.js"></script>
+		<!-- Google Maps API -->
+		<script async defer
+    		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAldSd8XQP3VPXbcOQ4smOrpH-rBy3r7O8&callback=initMap">
+    	</script>
 	</head>
 
 	<body>
 		<script>
 			initData();
+			function initMap() {
+				$(window).on('mapDataReady', function() {
+					new IoTMap('iot-map', '#iot-map-data');
+				})
+			}
 		</script>
+		<!-- IoTMap -->
+		<div id='iot-map' style="width:600px; height:400px"></div>
+		<div id='iot-map-data' style="width:600px; height:400px"></div>
+		<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 	</body>
 </html>

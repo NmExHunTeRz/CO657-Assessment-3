@@ -19,6 +19,12 @@ function initData() {
 			sites[item.id].name = item.name;
 			sites[item.id].loc = {"lat": item.lat, "lng": item.lon};
 			sites[item.id].devices = [];
+			if (item.id == 'house')
+				sites[item.id].icon = "../img/farm.png";
+			else if (item.id == 'outside')
+				sites[item.id].icon = "../img/plant.png";
+			else
+				sites[item.id].icon = "../img/greenhouse.png";
 		});
 		// Now get all device ID's 
 		getDevices();
@@ -61,7 +67,6 @@ function getDevicesInfo() {
 				$.each(item, function(itemindex, id) {
 					if (i.id == id) {
 						i.type = index;
-						console.log("Finished Adding Sensor!");
 					}
 				});
 			});
@@ -81,15 +86,17 @@ function updateData(sampleRate) {
 		var query = url + item.id + "/" + sampleRate;
 		$.get(query, function(data) {
 			if (item.type == "gas") item.data = data.gas_values;
-			else if (item.type == "solar") item.data = data.solar_values;
-			else if (item.type == "hydrometer") item.data = data.moisture_values;
+			else if (item.type == "solar") item.data = data.solar_value;
+			else if (item.type == "hydrometer") item.data = data.moisture_value;
 			else if (item.type == "tempHumid") {
-				item.data = data.temperature_values;
-				item.humidity = data.humidity_values;
+				item.data = data.temperature_value;
+				item.humidity = data.humidity_value;
 			}
-			else if (item.type == "lumosity") item.data = data.light_values;
+			else if (item.type == "lumosity") item.data = data.light_value;
 		});
 	});
+	//Trigger a custom event to initialize map
+	$(document).trigger('mapDataReady');
 }
 
 function Device(id, name, site, last_connection) {
@@ -104,5 +111,5 @@ function Device(id, name, site, last_connection) {
 
 function log() {
 	console.log(sites);
-	// console.log(sensors);
+	console.log(sensors);
 }
