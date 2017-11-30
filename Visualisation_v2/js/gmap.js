@@ -39,11 +39,10 @@ function addSiteMarkers(mapObject, dataDiv) {
 		marker.addListener('click', function() {
 			var str =  "<ul>";
 			$.each(site.devices, function(deviceIndex, device) {
-				str += "<li>" + device.name + ": " + device.data[device.data.length - 1][1] + "</li>";
+				str += "<li class='sensor-" + device.type + "'>" + device.name + ": " + device.data[device.data.length - 1][1] + "</li>";
 			});
 			str += "</ul>";
 			$(dataDiv).html(str);
 		});
 	});
-	// console.log(window.sites);
 }

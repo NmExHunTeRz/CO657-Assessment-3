@@ -112,4 +112,5 @@ function Device(id, name, site, last_connection) {
 function log() {
 	console.log(sites);
 	console.log(sensors);
+	console.log(sensorTypes);
 }

@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<!-- jQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- Google Maps API -->
+		<script async defer
+    		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAldSd8XQP3VPXbcOQ4smOrpH-rBy3r7O8&callback=initMap">
+    	</script>
+    	<!-- Bootstrap CSS -->
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    	<!-- Lato Font Family -->
+    	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+		<!-- Custom JS -->
+		<script src="../js/data-processing.js"></script>
+		<script src="../js/gmap.js"></script>
+		<!-- Custom CSS -->
+    	<link rel="stylesheet" href="../css/farm-iot.css"></head>
+	</head>
+
+	<body>
+		<!-- Generate data and Google map -->
+		<script>
+			initData();
+			function initMap() {
+				$(window).on('mapDataReady', function() {
+					new IoTMap('iot-map', '#iot-map-data');
+				})
+			}
+		</script>
+		<!-- IoTMap -->
+		<div class='container map-container'>
+			<div class='row'>
+				<div id='iot-map' class='col-md-6'></div>
+				<div id='iot-map-data' class='col-md-6'></div>
+			</div>
+		</div>
+		<div id='credits'>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+	</body>
+</html>
